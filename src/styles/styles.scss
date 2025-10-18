@@ -1,0 +1,86 @@
+@use '@angular/material' as mat;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'iran_yekan', sans-serif !important;
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --mdc-typography-font-family: 'iran_yekan', sans-serif;
+  --mat-typography-font-family: 'iran_yekan', sans-serif;
+}
+
+@font-face {
+  font-family: 'iran_yekan';
+  src: url('/assets/fonts/woff/iranyekanwebthin.woff') format('woff'),
+       url('/assets/fonts/ttf/iranyekanwebthin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'iran_yekan';
+  src: url('/assets/fonts/woff/iranyekanweblight.woff') format('woff'),
+       url('/assets/fonts/ttf/iranyekanweblight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'iran_yekan';
+  src: url('/assets/fonts/woff/iranyekanwebregular.woff') format('woff'),
+       url('/assets/fonts/ttf/iranyekanwebregular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'iran_yekan';
+  src: url('/assets/fonts/woff/iranyekanwebmedium.woff') format('woff'),
+       url('/assets/fonts/ttf/iranyekanwebmedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'iran_yekan';
+  src: url('/assets/fonts/woff/iranyekanwebbold.woff') format('woff'),
+       url('/assets/fonts/ttf/iranyekanwebbold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'iran_yekan';
+  src: url('/assets/fonts/woff/iranyekanwebextrabold.woff') format('woff'),
+       url('/assets/fonts/ttf/iranyekanwebextrabold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'iran_yekan';
+  src: url('/assets/fonts/woff/iranyekanwebblack.woff') format('woff'),
+       url('/assets/fonts/ttf/iranyekanwebblack.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'iran_yekan';
+  src: url('/assets/fonts/woff/iranyekanwebextrablack.woff') format('woff'),
+       url('/assets/fonts/ttf/iranyekanwebextrablack.ttf') format('truetype');
+  font-weight: 950;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'iran_yekan', "Helvetica Neue", sans-serif; }
