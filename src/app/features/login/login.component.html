@@ -1,0 +1,20 @@
+<div class="login-container">
+  <h2>ورود به سیستم</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="username">نام کاربری:</label>
+      <input id="username" formControlName="username" type="text" />
+      <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error">
+        نام کاربری الزامی است.
+      </div>
+    </div>
+    <div>
+      <label for="password">رمز عبور:</label>
+      <input id="password" formControlName="password" type="password" />
+      <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error">
+        رمز عبور الزامی است و باید حداقل 6 کاراکتر باشد.
+      </div>
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid">ورود</button>
+  </form>
+</div>
