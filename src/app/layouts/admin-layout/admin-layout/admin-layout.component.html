@@ -1,0 +1,20 @@
+<mat-toolbar class="header">
+  <div class="flex items-center justify-between w-full">
+     <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+          <mat-icon>menu</mat-icon>
+     </button>
+     <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/dashboard">داشبورد</button>
+      <button mat-menu-item routerLink="/users">کاربران</button>
+      <button mat-menu-item routerLink="/products">محصولات</button>
+      <button mat-menu-item routerLink="/orders">سفارش‌ها</button>
+      <button mat-menu-item routerLink="/settings">تنظیمات</button>
+      <button mat-menu-item (click)="logout()">خروج</button>
+    </mat-menu>
+
+    <mat-slide-toggle [checked]="isDarkTheme()" (change)="toggleTheme()">
+    </mat-slide-toggle>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
