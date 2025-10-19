@@ -1,0 +1,35 @@
+.container {
+  @apply p-6 max-w-7xl mx-auto;
+}
+
+.order-info {
+  @apply bg-neutral-50 dark:bg-neutral-900 p-4 rounded-lg shadow-sm mb-6;
+}
+
+.order-info p {
+  @apply text-right text-neutral-800 dark:text-neutral-100;
+}
+
+table {
+  @apply w-full mb-6;
+}
+
+th.mat-header-cell {
+  @apply text-right font-bold text-neutral-800 dark:text-neutral-100;
+}
+
+td.mat-cell {
+  @apply text-right;
+}
+
+.actions {
+  @apply flex justify-end;
+}
+
+button[color="primary"] {
+  @apply bg-primary-500 text-white hover:bg-primary-600;
+}
+
+.loading {
+  @apply text-center text-neutral-500 text-lg py-8;
+}

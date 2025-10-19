@@ -1,0 +1,17 @@
+<div class="p-6">
+  <h2 mat-dialog-title>تغییر وضعیت سفارش</h2>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>وضعیت</mat-label>
+      <mat-select [ngModel]="status()" (ngModelChange)="status.set($event)">
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status | orderStatus }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close()">لغو</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!status()">ذخیره</button>
+  </mat-dialog-actions>
+</div>
