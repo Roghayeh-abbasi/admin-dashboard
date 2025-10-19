@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{ product ? 'ویرایش محصول' : 'افزودن محصول' }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="productForm" class="form-container">
+    <mat-form-field class="form-field">
+      <input matInput formControlName="title" placeholder="عنوان">
+      @if (productForm.get('title')?.hasError('required')) {
+        <mat-error>عنوان الزامی است</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput type="number" formControlName="price" placeholder="قیمت">
+      @if (productForm.get('price')?.hasError('required')) {
+        <mat-error>قیمت الزامی است</mat-error>
+      }
+      @if (productForm.get('price')?.hasError('min')) {
+        <mat-error>قیمت باید مثبت باشد</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-select formControlName="category" placeholder="دسته‌بندی">
+        <mat-option value="electronics">الکترونیک</mat-option>
+        <mat-option value="jewelery">جواهرات</mat-option>
+        <mat-option value="men's clothing">لباس مردانه</mat-option>
+        <mat-option value="women's clothing">لباس زنانه</mat-option>
+      </mat-select>
+      @if (productForm.get('category')?.hasError('required')) {
+        <mat-error>دسته‌بندی الزامی است</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput formControlName="image" placeholder="لینک تصویر">
+      @if (productForm.get('image')?.hasError('required')) {
+        <mat-error>لینک تصویر الزامی است</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="dialogRef.close()">لغو</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="productForm.invalid">ذخیره</button>
+</mat-dialog-actions>

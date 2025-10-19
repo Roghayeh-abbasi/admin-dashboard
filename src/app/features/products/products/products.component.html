@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="filter-bar">
+    <mat-form-field class="search-field">
+      <input matInput [(ngModel)]="searchQuery" placeholder="جستجو بر اساس عنوان" (input)="filterProducts()">
+    </mat-form-field>
+    <mat-form-field class="category-field">
+      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="filterProducts()" placeholder="دسته‌بندی">
+        <mat-option value="">همه</mat-option>
+        @for (category of categories(); track category) {
+          <mat-option [value]="category">{{ category }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="openProductForm()">افزودن محصول</button>
+  </div>
+  <div class="products-grid">
+    @if (filteredProducts().length > 0) {
+      @for (product of filteredProducts(); track product.id) {
+        <app-card [title]="product.title" @cardAnimation>
+          <img [src]="product.image" [alt]="product.title" class="product-image" />
+          <p class="product-price">قیمت: {{ product.price | number }} تومان</p>
+          <p class="product-category">دسته‌بندی: {{ product.category }}</p>
+          <div class="product-actions">
+            <button mat-button color="primary" (click)="openProductForm(product)">ویرایش</button>
+            <button mat-button color="warn" (click)="deleteProduct(product.id)">حذف</button>
+          </div>
+        </app-card>
+      } @empty {
+        <p class="no-products">محصولی یافت نشد</p>
+      }
+    } @else {
+      <p class="loading">در حال بارگذاری...</p>
+    }
+  </div>
+</div>

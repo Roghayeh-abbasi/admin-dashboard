@@ -1,0 +1,23 @@
+.form-container {
+  @apply flex flex-col gap-6 p-4;
+}
+
+.form-field {
+  @apply w-full;
+}
+
+.dialog-actions {
+  @apply flex justify-end gap-3 pt-4;
+}
+
+button[mat-raised-button] {
+  @apply px-6 py-2 rounded-md;
+}
+
+button[color="primary"] {
+  @apply bg-primary-500 text-white hover:bg-primary-600;
+}
+
+button[color="warn"] {
+  @apply bg-danger-500 text-white hover:bg-danger-600;
+}

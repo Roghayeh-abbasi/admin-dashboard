@@ -1,0 +1,39 @@
+.container {
+  @apply p-6 max-w-7xl mx-auto;
+}
+
+.filter-bar {
+  @apply flex flex-col md:flex-row gap-4 mb-6 bg-neutral-50 dark:bg-neutral-900 p-4 rounded-lg shadow-sm;
+}
+
+.search-field {
+  @apply flex-1;
+}
+
+.status-field {
+  @apply w-full md:w-48;
+}
+
+.table-container {
+  @apply overflow-x-auto;
+}
+
+table {
+  @apply w-full;
+}
+
+th.mat-header-cell {
+  @apply text-right font-bold text-neutral-800 dark:text-neutral-100;
+}
+
+td.mat-cell {
+  @apply text-right;
+}
+
+.no-orders {
+  @apply text-center text-neutral-500 text-lg py-8;
+}
+
+button[color="primary"] {
+  @apply bg-primary-500 text-white hover:bg-primary-600 mx-1;
+}
