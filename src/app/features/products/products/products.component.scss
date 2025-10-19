@@ -1,0 +1,50 @@
+.container {
+  @apply p-6 max-w-7xl mx-auto;
+}
+
+.filter-bar {
+  @apply flex flex-col md:flex-row gap-4 mb-6 bg-neutral-50 dark:bg-neutral-900 p-4 rounded-lg shadow-sm;
+}
+
+.search-field {
+  @apply flex-1;
+}
+
+.category-field {
+  @apply w-full md:w-48;
+}
+
+.products-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.product-image {
+  @apply w-full h-48 object-cover rounded-t-lg;
+}
+
+.product-price, .product-category {
+  @apply text-right text-sm mt-2;
+}
+
+.product-actions {
+  @apply flex gap-2 justify-end mt-4;
+}
+
+.no-products, .loading {
+  @apply text-center text-neutral-500 text-lg py-8;
+}
+
+app-card {
+  @apply transition-transform duration-300 ease-in-out;
+  &:hover {
+    @apply transform scale-105 shadow-lg;
+  }
+}
+
+button[color="primary"] {
+  @apply bg-primary-500 text-white hover:bg-primary-600;
+}
+
+button[color="warn"] {
+  @apply bg-danger-500 text-white hover:bg-danger-600;
+}
