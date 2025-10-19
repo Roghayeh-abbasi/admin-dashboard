@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from './features/login/login.component';
+import { AppComponent } from './app.component';
+import { authGuard } from './core/services/auth.guard';
 
 export const routes: Routes = [
+
+  { path: '', component: LoginComponent },
   {
     path: '',
     redirectTo: '/orders',
@@ -20,5 +25,6 @@ export const routes: Routes = [
     path: 'orders/:id',
     loadComponent: () =>
       import('./features/orders/order-details/order-details/order-details.component').then(c => c.OrderDetailsComponent),
-  }
+  },
+  { path: 'dashboard', component: AppComponent, canActivate: [authGuard] },
 ];
