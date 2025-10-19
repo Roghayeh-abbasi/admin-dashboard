@@ -1,0 +1,25 @@
+.header {
+  @apply bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50;
+  @apply sticky mb-8 top-0 z-10 border border-neutral-300 dark:border-neutral-700;
+  @apply shadow-[0_2px_8px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)];
+  font-family: 'iran_yekan', sans-serif;
+  direction: rtl;
+}
+
+mat-toolbar {
+  @apply px-4 py-2;
+}
+
+.menu-button {
+  @apply bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50;
+  @apply border border-neutral-300 dark:border-neutral-600 rounded-md;
+  @apply transition-all duration-200;
+}
+
+.menu-button:hover {
+  @apply bg-primary-400 text-white;
+}
+
+mat-slide-toggle {
+  @apply text-neutral-900 dark:text-neutral-50 text-sm;
+}
