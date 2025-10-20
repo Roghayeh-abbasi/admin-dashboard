@@ -21,12 +21,9 @@ export class OrderStatusPipe implements PipeTransform {
       console.warn('Status is undefined or null');
       return 'نامشخص';
     }
-    console.log('Pipe input:', value, 'Type:', typeof value);
     const stringValue = value.toString();
     const normalizedValue = stringValue.toUpperCase();
-    console.log('Normalized value:', normalizedValue);
     const result = this.statusMap[normalizedValue] || this.statusMap[stringValue] || 'نامشخص';
-    console.log('Pipe output:', result);
     return result;
   }
 }

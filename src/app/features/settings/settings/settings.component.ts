@@ -36,23 +36,18 @@ export class SettingsComponent {
 
   constructor() {
     const currentUsername = this.authService.getCurrentUsername() || 'admin';
-    console.log('SettingsComponent initialized, currentUsername:', currentUsername);
     this.settingsForm = this.fb.group({
       username: [currentUsername, [Validators.required, Validators.minLength(3)]],
       darkTheme: [this.isDarkTheme()]
     });
     this.settingsForm.get('darkTheme')?.valueChanges.subscribe(value => {
       if (value !== this.isDarkTheme()) {
-        console.log('Toggling theme to:', value);
         this.themeService.toggleTheme();
       }
     });
   }
 
   onSubmit() {
-    console.log('onSubmit called at', new Date().toISOString());
-    console.log('Form valid:', this.settingsForm.valid);
-    console.log('Form value:', this.settingsForm.value);
     if (this.settingsForm.valid) {
       const { username } = this.settingsForm.value;
       this.authService.updateUsername(username);
@@ -61,15 +56,12 @@ export class SettingsComponent {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       });
-      console.log('تنظیمات ذخیره شد:', { username, darkTheme: this.isDarkTheme() });
-      console.log('localStorage after save:', { adminUsername: localStorage.getItem('adminUsername') });
     } else {
       console.log('فرم نامعتبر است، ذخیره نشد.');
     }
   }
 
   logout() {
-    console.log('Logout called from SettingsComponent');
     this.authService.logout();
     this.router.navigate(['/']);
   }

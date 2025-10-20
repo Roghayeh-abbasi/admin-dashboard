@@ -4,14 +4,11 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root'
 })
 export class ThemeService {
-  // Signal برای مدیریت حالت تم
   private _isDarkTheme = signal<boolean>(false);
 
-  // دسترسی به حالت تم
   isDarkTheme = this._isDarkTheme.asReadonly();
 
   constructor() {
-    // بررسی تم ذخیره‌شده در localStorage
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       this._isDarkTheme.set(true);
@@ -19,7 +16,6 @@ export class ThemeService {
     }
   }
 
-  // تغییر تم
   toggleTheme() {
     this._isDarkTheme.update(current => {
       const newTheme = !current;
