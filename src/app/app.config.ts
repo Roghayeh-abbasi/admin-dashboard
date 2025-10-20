@@ -13,6 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     importProvidersFrom(ReactiveFormsModule),
     provideAnimationsAsync(),
-    AuthService
+    { provide: AuthService, useClass: AuthService }
   ]
 };

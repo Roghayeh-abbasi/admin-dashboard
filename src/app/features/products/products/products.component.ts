@@ -24,7 +24,6 @@ import { ProductFormComponent } from '../product-form/product-form/product-form.
     MatButtonModule,
     MatDialogModule,
     CardComponent,
-    ProductFormComponent
   ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
