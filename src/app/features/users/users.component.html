@@ -1,0 +1,24 @@
+<div class="users-container">
+  <form [formGroup]="searchForm" class="search-form">
+    <input formControlName="searchTerm" placeholder="جستجو بر اساس نام یا ایمیل..." class="search-input" />
+  </form>
+
+  <form [formGroup]="addUserForm" (ngSubmit)="onAddUser()" class="add-user-form">
+    <input formControlName="name" placeholder="نام کاربر" />
+    <input formControlName="email" placeholder="ایمیل کاربر" />
+    <button type="submit" [disabled]="addUserForm.invalid">افزودن کاربر</button>
+  </form>
+
+  <ul class="users-list">
+    <li *ngFor="let user of filteredUsers" class="user-item">
+      <div class="user-info">
+        <span class="user-name">{{ user.name }}</span>
+        <span class="user-email"> - {{ user.email }} (شناسه: {{ user.id }})</span>
+      </div>
+      <div class="actions">
+        <button class="edit" (click)="onEdit(user)">ویرایش</button>
+        <button class="delete" (click)="onDelete(user.id)">حذف</button>
+      </div>
+    </li>
+  </ul>
+</div>

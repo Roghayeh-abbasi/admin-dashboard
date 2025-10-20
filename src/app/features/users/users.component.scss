@@ -1,0 +1,241 @@
+.users-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  direction: rtl;
+
+  .search-form,
+  .add-user-form {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #f9fafb;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #374151;
+      background-color: #fff;
+      transition: all 0.3s ease;
+
+      &:focus {
+        border-color: #93c5fd;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+      }
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 20px;
+      background-color: #93c5fd;
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #60a5fa;
+        transform: translateY(-2px);
+      }
+
+      &:disabled {
+        background-color: #d1d5db;
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .users-list {
+    list-style: none;
+    padding: 0;
+
+    .user-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .user-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .user-name {
+          font-weight: 600;
+          color: #1f2937;
+          font-size: 16px;
+        }
+
+        .user-email {
+          color: #6b7280;
+          font-size: 14px;
+        }
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+
+        button {
+          padding: 8px 20px;
+          border: none;
+          border-radius: 20px;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          min-width: 90px;
+
+          &.edit {
+            background-color: #93c5fd;
+            color: #fff;
+
+            &:hover {
+              background-color: #60a5fa;
+              transform: translateY(-2px);
+            }
+          }
+
+          &.delete {
+            background-color: #fbb6ce;
+            color: #fff;
+
+            &:hover {
+              background-color: #f472b6;
+              transform: translateY(-2px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.dark-theme {
+    background-color: #111827;
+
+    .search-form,
+    .add-user-form {
+      background-color: #1f2937;
+
+      input {
+        color: #d1d5db;
+        background-color: #374151;
+        border-color: #4b5563;
+
+        &:focus {
+          border-color: #93c5fd;
+          box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+        }
+      }
+
+      button {
+        background-color: #93c5fd;
+
+        &:hover {
+          background-color: #60a5fa;
+        }
+
+        &:disabled {
+          background-color: #4b5563;
+        }
+      }
+    }
+
+    .user-item {
+      background-color: #1f2937;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .user-info {
+        color: #d1d5db;
+
+        .user-name {
+          color: #f9fafb;
+        }
+
+        .user-email {
+          color: #9ca3af;
+        }
+      }
+
+      .actions button {
+        &.edit {
+          background-color: #93c5fd;
+
+          &:hover {
+            background-color: #60a5fa;
+          }
+        }
+
+        &.delete {
+          background-color: #fbb6ce;
+
+          &:hover {
+            background-color: #f472b6;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 10px;
+
+    .user-item {
+      flex-direction: column;
+      text-align: center;
+      padding: 12px;
+
+      .user-info {
+        margin-bottom: 12px;
+      }
+
+      .actions {
+        justify-content: center;
+        gap: 12px;
+      }
+    }
+
+    .search-form,
+    .add-user-form {
+      flex-direction: column;
+      gap: 12px;
+
+      input {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
