@@ -1,41 +1,53 @@
-<h2 mat-dialog-title>{{ product ? 'ویرایش محصول' : 'افزودن محصول' }}</h2>
-<mat-dialog-content>
-  <form [formGroup]="productForm" class="form-container">
-    <mat-form-field class="form-field">
-      <input matInput formControlName="title" placeholder="عنوان">
-      @if (productForm.get('title')?.hasError('required')) {
-        <mat-error>عنوان الزامی است</mat-error>
-      }
-    </mat-form-field>
-    <mat-form-field class="form-field">
-      <input matInput type="number" formControlName="price" placeholder="قیمت">
-      @if (productForm.get('price')?.hasError('required')) {
-        <mat-error>قیمت الزامی است</mat-error>
-      }
-      @if (productForm.get('price')?.hasError('min')) {
-        <mat-error>قیمت باید مثبت باشد</mat-error>
-      }
-    </mat-form-field>
-    <mat-form-field class="form-field">
-      <mat-select formControlName="category" placeholder="دسته‌بندی">
-        <mat-option value="electronics">الکترونیک</mat-option>
-        <mat-option value="jewelery">جواهرات</mat-option>
-        <mat-option value="men's clothing">لباس مردانه</mat-option>
-        <mat-option value="women's clothing">لباس زنانه</mat-option>
-      </mat-select>
-      @if (productForm.get('category')?.hasError('required')) {
-        <mat-error>دسته‌بندی الزامی است</mat-error>
-      }
-    </mat-form-field>
-    <mat-form-field class="form-field">
-      <input matInput formControlName="image" placeholder="لینک تصویر">
-      @if (productForm.get('image')?.hasError('required')) {
-        <mat-error>لینک تصویر الزامی است</mat-error>
-      }
-    </mat-form-field>
+<h2 mat-dialog-title class="text-2xl font-bold text-neutral-900 dark:text-neutral-50 font-['iran_yekan'] border-b border-neutral-200 dark:border-neutral-700 pb-2" dir="rtl">{{ product ? 'ویرایش محصول' : 'افزودن محصول' }}</h2>
+<mat-dialog-content class="flex flex-col gap-8 p-10 bg-gradient-to-b from-neutral-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900 rounded-lg border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-50 shadow-md max-w-lg mx-auto font-['iran_yekan']" dir="rtl">
+  <form [formGroup]="productForm" class="flex flex-col gap-8">
+    <div class="flex flex-col gap-4">
+      <label for="title" class="text-sm font-medium text-neutral-900 dark:text-neutral-50">عنوان</label>
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput id="title" formControlName="title" placeholder="عنوان" class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 text-sm transition-all duration-300 focus:border-primary-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.2)]">
+        @if (productForm.get('title')?.hasError('required')) {
+          <mat-error class="text-danger-500 text-xs mt-1.5">عنوان الزامی است</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="flex flex-col gap-4">
+      <label for="price" class="text-sm font-medium text-neutral-900 dark:text-neutral-50">قیمت</label>
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput id="price" type="number" formControlName="price" placeholder="قیمت" class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 text-sm transition-all duration-300 focus:border-primary-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.2)]">
+        @if (productForm.get('price')?.hasError('required')) {
+          <mat-error class="text-danger-500 text-xs mt-1.5">قیمت الزامی است</mat-error>
+        }
+        @if (productForm.get('price')?.hasError('min')) {
+          <mat-error class="text-danger-500 text-xs mt-1.5">قیمت باید مثبت باشد</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="flex flex-col gap-4">
+      <label for="category" class="text-sm font-medium text-neutral-900 dark:text-neutral-50">دسته‌بندی</label>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-select id="category" formControlName="category" placeholder="دسته‌بندی" class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 text-sm transition-all duration-300">
+          <mat-option value="electronics">الکترونیک</mat-option>
+          <mat-option value="jewelery">جواهرات</mat-option>
+          <mat-option value="men's clothing">لباس مردانه</mat-option>
+          <mat-option value="women's clothing">لباس زنانه</mat-option>
+        </mat-select>
+        @if (productForm.get('category')?.hasError('required')) {
+          <mat-error class="text-danger-500 text-xs mt-1.5">دسته‌بندی الزامی است</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="flex flex-col gap-4">
+      <label for="image" class="text-sm font-medium text-neutral-900 dark:text-neutral-50">لینک تصویر</label>
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput id="image" formControlName="image" placeholder="لینک تصویر" class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 text-sm transition-all duration-300 focus:border-primary-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.2)]">
+        @if (productForm.get('image')?.hasError('required')) {
+          <mat-error class="text-danger-500 text-xs mt-1.5">لینک تصویر الزامی است</mat-error>
+        }
+      </mat-form-field>
+    </div>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions class="dialog-actions">
-  <button mat-button (click)="dialogRef.close()">لغو</button>
-  <button mat-raised-button color="primary" (click)="save()" [disabled]="productForm.invalid">ذخیره</button>
+<mat-dialog-actions class="flex justify-end gap-4 p-6 font-['iran_yekan']" dir="rtl">
+  <button mat-button (click)="dialogRef.close()" class="bg-neutral-300 dark:bg-neutral-700 border border-neutral-400 dark:border-neutral-600 text-neutral-900 dark:text-neutral-50 px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-neutral-400 dark:hover:bg-neutral-600">لغو</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="productForm.invalid" class="bg-primary-400 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-500 disabled:bg-neutral-300 disabled:dark:bg-neutral-600 disabled:text-neutral-500 disabled:dark:text-neutral-400 disabled:opacity-60">ذخیره</button>
 </mat-dialog-actions>
