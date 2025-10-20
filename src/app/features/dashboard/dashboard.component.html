@@ -20,6 +20,9 @@
     <h2 class="chart-title">روند ثبت‌نام کاربران</h2>
     <div class="chart-container">
       <canvas baseChart [data]="chartData" [options]="chartOptions" [type]="'line'"></canvas>
+      <p *ngIf="!chartData || !chartData.datasets || chartData.datasets.length === 0" class="no-data">
+        داده‌ای برای نمایش چارت وجود ندارد.
+      </p>
     </div>
   </div>
 </div>

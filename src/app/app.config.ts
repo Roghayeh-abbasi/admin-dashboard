@@ -1,5 +1,6 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding  } from '@angular/router';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     importProvidersFrom(ReactiveFormsModule),
     provideAnimationsAsync(),
-    { provide: AuthService, useClass: AuthService }
+    { provide: AuthService, useClass: AuthService },
+    provideCharts(withDefaultRegisterables()), 
   ]
 };
