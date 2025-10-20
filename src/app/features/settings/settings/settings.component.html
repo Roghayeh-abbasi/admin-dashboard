@@ -1,6 +1,5 @@
 <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5 p-6 bg-neutral-50 dark:bg-neutral-800 rounded-lg border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-50 shadow-sm max-w-2xl mx-auto font-['iran_yekan']" dir="rtl">
   <h2 class="mx-auto text-2xl font-bold text-neutral-900 dark:text-neutral-50">تنظیمات</h2>
-
   <div class="flex flex-col gap-2">
     <label for="username" class="text-sm font-medium text-neutral-900 dark:text-neutral-50">نام ادمین</label>
     <mat-form-field appearance="outline" class="w-full">
@@ -16,15 +15,13 @@
       }
     </mat-form-field>
   </div>
-
   <div class="flex flex-col gap-2">
     <label class="text-sm font-medium text-neutral-900 dark:text-neutral-50">حالت تم</label>
     <mat-slide-toggle formControlName="darkTheme" class="text-neutral-900 dark:text-neutral-50 text-sm">
     </mat-slide-toggle>
   </div>
-
   <div class="flex gap-4">
-    <button mat-raised-button type="submit" class="bg-neutral-100 dark:bg-neutral-700 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-neutral-50 px-4 py-2 rounded-md text-[0.95rem] font-semibold transition-all duration-200 hover:bg-primary-400 hover:text-white disabled:bg-neutral-300 disabled:dark:bg-neutral-600 disabled:text-neutral-500 disabled:dark:text-neutral-400 disabled:opacity-60" [disabled]="settingsForm.invalid">
+    <button mat-raised-button type="submit" class="bg-neutral-100 dark:bg-neutral-700 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-neutral-50 px-4 py-2 rounded-md text-[0.95rem] font-semibold transition-all duration-200 hover:bg-primary-400 hover:text-white disabled:bg-neutral-300 disabled:dark:bg-neutral-600 disabled:text-neutral-500 disabled:dark:text-neutral-400 disabled:opacity-60" [disabled]="settingsForm.get('username')?.invalid">
       ذخیره تنظیمات
     </button>
     <button mat-raised-button color="warn" type="button" (click)="logout()" class="bg-neutral-100 dark:bg-neutral-700 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-neutral-50 px-4 py-2 rounded-md text-[0.95rem] font-semibold transition-all duration-200 hover:bg-primary-400 hover:text-white">

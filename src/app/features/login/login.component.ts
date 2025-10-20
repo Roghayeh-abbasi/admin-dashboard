@@ -1,45 +1,44 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule]
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
   private router = inject(Router);
   loginForm!: FormGroup;
   errorMessage: string = '';
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
- onSubmit() {
+  onSubmit() {
+    this.errorMessage = '';
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-     
-      const validAdmins = [
-        { username: 'admin', password: 'admin123', role: 'admin' }
-      ];
-      const admin = validAdmins.find(u => u.username === username && u.password === password);
-      if (admin) {
-        const token = 'fake-token-' + Date.now();
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('username', username); 
+      if (this.authService.login(username, password)) {
+        localStorage.setItem('username', username);
         this.loginForm.reset();
         this.errorMessage = '';
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/admin']);
       } else {
-        this.errorMessage = 'فقط ادمین با نام کاربری و رمز معتبر می‌تواند وارد شود!';
+        this.errorMessage = 'نام کاربری یا رمز عبور اشتباه است!';
       }
     } else {
       this.errorMessage = 'لطفاً فرم را به‌درستی پر کنید.';
