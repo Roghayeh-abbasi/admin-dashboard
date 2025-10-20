@@ -20,5 +20,14 @@
         <button class="delete" (click)="onDelete(user.id)">حذف</button>
       </div>
     </li>
+    
+    <li *ngIf="filteredUsers.length === 0 && searchForm.get('searchTerm')?.value?.trim()" 
+        class="no-results">
+      <div class="no-results-content">
+        <span class="no-results-icon">🔍</span>
+        <p>هیچ کاربری با عبارت «{{ searchForm.get('searchTerm')?.value }}» یافت نشد.</p>
+        <small>لطفاً عبارت دیگری امتحان کنید.</small>
+      </div>
+    </li>
   </ul>
 </div>

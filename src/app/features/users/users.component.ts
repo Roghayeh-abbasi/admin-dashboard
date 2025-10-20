@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,13 +15,21 @@ import { UserModalComponent } from './user-modal.component';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
   users$: Observable<any[]> | undefined;
   filteredUsers: any[] = [];
+  allUsers: any[] = [];
   searchForm: FormGroup;
   addUserForm: FormGroup;
+  private usersSubscription?: Subscription;
+  private darkModeListener?: MediaQueryList;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, public dialog: MatDialog) {
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private renderer: Renderer2
+  ) {
     this.searchForm = this.fb.group({
       searchTerm: ['']
     });
@@ -36,24 +44,44 @@ export class UsersComponent implements OnInit {
     this.searchForm.get('searchTerm')?.valueChanges.subscribe(term => {
       this.filterUsers(term);
     });
+
+    this.darkModeListener = window.matchMedia('(prefers-color-scheme: dark)');
+    this.applyDarkMode(this.darkModeListener.matches);
+    this.darkModeListener.addEventListener('change', (event) => {
+      this.applyDarkMode(event.matches);
+    });
+  }
+
+  private applyDarkMode(isDark: boolean) {
+    if (isDark) {
+      this.renderer.addClass(document.body, 'dark-theme');
+    } else {
+      this.renderer.removeClass(document.body, 'dark-theme');
+    }
   }
 
   loadUsers() {
     this.users$ = this.http.get<any[]>('https://jsonplaceholder.typicode.com/users').pipe(
       tap(data => {
-        this.filteredUsers = data;
+        this.allUsers = data;
+        this.filteredUsers = [...data];
       })
     );
+    this.usersSubscription = this.users$?.subscribe({
+      error: (err) => console.error('خطا در لود کاربران:', err)
+    });
   }
 
   filterUsers(term: string) {
-    if (!this.users$) return;
-    this.users$.subscribe(data => {
-      this.filteredUsers = data.filter(user =>
-        user.name.toLowerCase().includes(term.toLowerCase()) ||
-        user.email.toLowerCase().includes(term.toLowerCase())
+    const lowerTerm = term.toLowerCase().trim();
+    if (lowerTerm === '') {
+      this.filteredUsers = [...this.allUsers];
+    } else {
+      this.filteredUsers = this.allUsers.filter(user =>
+        user.name.toLowerCase().startsWith(lowerTerm) ||
+        user.email.toLowerCase().startsWith(lowerTerm)
       );
-    });
+    }
   }
 
   onDelete(userId: number) {
@@ -63,11 +91,10 @@ export class UsersComponent implements OnInit {
         width: '400px',
         data: { mode: 'delete', user }
       });
-
       dialogRef.afterClosed().subscribe(result => {
         if (result && result.mode === 'delete') {
-          this.filteredUsers = this.filteredUsers.filter(u => u.id !== result.userId);
-          console.log('کاربر با شناسه', result.userId, 'حذف شد.');
+          this.allUsers = this.allUsers.filter(u => u.id !== result.userId);
+          this.filterUsers(this.searchForm.get('searchTerm')?.value || '');
         }
       });
     }
@@ -78,14 +105,13 @@ export class UsersComponent implements OnInit {
       width: '400px',
       data: { mode: 'edit', user }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.mode === 'edit') {
-        const index = this.filteredUsers.findIndex(u => u.id === user.id);
-        if (index !== -1) {
-          this.filteredUsers[index] = { ...user, ...result.user };
-          console.log('کاربر ویرایش شد:', this.filteredUsers[index]);
+        const allIndex = this.allUsers.findIndex(u => u.id === user.id);
+        if (allIndex !== -1) {
+          this.allUsers[allIndex] = { ...this.allUsers[allIndex], ...result.user };
         }
+        this.filterUsers(this.searchForm.get('searchTerm')?.value || '');
       }
     });
   }
@@ -93,9 +119,16 @@ export class UsersComponent implements OnInit {
   onAddUser() {
     if (this.addUserForm.valid) {
       const newUser = { id: Date.now(), ...this.addUserForm.value };
-      this.filteredUsers = [newUser, ...this.filteredUsers];
+      this.allUsers = [newUser, ...this.allUsers];
+      this.filterUsers(this.searchForm.get('searchTerm')?.value || '');
       this.addUserForm.reset();
-      console.log('کاربر جدید اضافه شد:', newUser);
     }
+  }
+
+  ngOnDestroy() {
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
+    }
+    this.darkModeListener?.removeEventListener('change', () => {});
   }
 }

@@ -19,12 +19,12 @@ export const routes: Routes = [
         redirectTo: 'orders',
         pathMatch: 'full'
       },
-      // {
-      //   path: 'dashboard',
-      //   loadComponent: () =>
-      //     import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent)
-      // },
       {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent)
+      },
+     {
         path: 'users',
         loadComponent: () =>
           import('./features/users/users.component').then(c => c.UsersComponent)
