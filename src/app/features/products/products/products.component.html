@@ -1,35 +1,38 @@
-<div class="container">
-  <div class="filter-bar">
-    <mat-form-field class="search-field">
-      <input matInput [(ngModel)]="searchQuery" placeholder="جستجو بر اساس عنوان" (input)="filterProducts()">
+<div class="container mx-auto p-6 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50 font-['iran_yekan']" dir="rtl">
+  <div class="filter-bar flex flex-col sm:flex-row gap-6 mb-8">
+    <mat-form-field appearance="outline" class="flex-1">
+      <input matInput [(ngModel)]="searchQuery" placeholder="جستجو بر اساس عنوان" (input)="filterProducts()" class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 text-sm transition-all duration-300 focus:border-primary-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.2)]">
     </mat-form-field>
-    <mat-form-field class="category-field">
-      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="filterProducts()" placeholder="دسته‌بندی">
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="filterProducts()" placeholder="دسته‌بندی" class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 text-sm transition-all duration-300">
         <mat-option value="">همه</mat-option>
         @for (category of categories(); track category) {
           <mat-option [value]="category">{{ category }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="openProductForm()">افزودن محصول</button>
-  </div>
-  <div class="products-grid">
+<button mat-raised-button (click)="openProductForm()" class="bg-primary-500 text-white border border-primary-600 px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">افزودن محصول</button>  </div>
+  <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     @if (filteredProducts().length > 0) {
       @for (product of filteredProducts(); track product.id) {
         <app-card [title]="product.title" @cardAnimation>
-          <img [src]="product.image" [alt]="product.title" class="product-image" />
-          <p class="product-price">قیمت: {{ product.price | number }} تومان</p>
-          <p class="product-category">دسته‌بندی: {{ product.category }}</p>
-          <div class="product-actions">
-            <button mat-button color="primary" (click)="openProductForm(product)">ویرایش</button>
-            <button mat-button color="warn" (click)="deleteProduct(product.id)">حذف</button>
+          <div class="flex flex-col h-full justify-between gap-8">
+            <img [src]="product.image" [alt]="product.title" class="product-image w-full h-48 object-cover rounded-lg" />
+            <div class="flex flex-col gap-3 max-h-[80px]">
+              <p class="product-price text-sm font-medium text-neutral-900 dark:text-neutral-50 truncate">قیمت: {{ product.price | number }} تومان</p>
+              <p class="product-category text-sm text-neutral-600 dark:text-neutral-400 truncate">دسته‌بندی: {{ product.category }}</p>
+            </div>
+            <div class="product-actions flex justify-end gap-3">
+              <button mat-button (click)="openProductForm(product)" class="bg-primary-500 text-white border border-primary-600 px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">ویرایش</button>
+              <button mat-button (click)="deleteProduct(product.id)" class="bg-danger-500 text-white border border-danger-600 px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-danger-600 hover:border-danger-700">حذف</button>
+            </div>
           </div>
         </app-card>
       } @empty {
-        <p class="no-products">محصولی یافت نشد</p>
+        <p class="no-products text-center text-neutral-600 dark:text-neutral-400 mt-6 text-base">محصولی یافت نشد</p>
       }
     } @else {
-      <p class="loading">در حال بارگذاری...</p>
+      <p class="loading text-center text-neutral-600 dark:text-neutral-400 mt-6 text-base">در حال بارگذاری...</p>
     }
   </div>
 </div>

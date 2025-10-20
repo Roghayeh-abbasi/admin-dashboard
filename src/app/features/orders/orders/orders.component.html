@@ -1,15 +1,15 @@
-<div class="container">
+<div class="container mx-auto p-6 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50 font-['iran_yekan']" dir="rtl">
   @if (error()) {
-    <p class="error">{{ error() }}</p>
+    <p class="error text-neutral-600 dark:text-neutral-400 text-base text-center mb-8">{{ error() }}</p>
   }
-  <div class="filters">
-    <mat-form-field appearance="outline" class="w-full sm:w-1/2">
+  <div class="filters flex flex-col sm:flex-row gap-6 mb-8 items-center">
+    <mat-form-field appearance="outline" class="flex-1">
       <mat-label>جستجو بر اساس نام کاربر</mat-label>
-      <input matInput [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event); filterOrders()" placeholder="نام کاربر">
+      <input matInput [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event); filterOrders()" placeholder="نام کاربر" class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 text-sm transition-all duration-300 focus:border-primary-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.2)]">
     </mat-form-field>
     <mat-form-field appearance="outline" class="w-full sm:w-1/4">
       <mat-label>وضعیت</mat-label>
-      <mat-select [ngModel]="selectedStatus()" (ngModelChange)="selectedStatus.set($event); filterOrders()">
+      <mat-select [ngModel]="selectedStatus()" (ngModelChange)="selectedStatus.set($event); filterOrders()" class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 text-sm transition-all duration-300">
         <mat-option value="">همه</mat-option>
         @for (status of statuses; track status) {
           <mat-option [value]="status">{{ status | orderStatus }}</mat-option>
@@ -18,37 +18,37 @@
     </mat-form-field>
   </div>
 
-  <table mat-table [dataSource]="paginatedOrders()" class="mat-elevation-z2">
+  <table mat-table [dataSource]="paginatedOrders()" class="bg-white dark:bg-neutral-800 rounded-xl shadow-md w-full text-sm">
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>شناسه</th>
-      <td mat-cell *matCellDef="let order" @rowAnimation>{{ order.id }}</td>
+      <th mat-header-cell *matHeaderCellDef class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 font-semibold px-4 py-4">شناسه</th>
+      <td mat-cell *matCellDef="let order" @rowAnimation class="text-neutral-900 dark:text-neutral-50 px-4 py-4">{{ order.id }}</td>
     </ng-container>
     <ng-container matColumnDef="userName">
-      <th mat-header-cell *matHeaderCellDef>کاربر</th>
-      <td mat-cell *matCellDef="let order" @rowAnimation>{{ order.userName || 'نامشخص' }}</td>
+      <th mat-header-cell *matHeaderCellDef class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 font-semibold px-4 py-4">کاربر</th>
+      <td mat-cell *matCellDef="let order" @rowAnimation class="text-neutral-900 dark:text-neutral-50 px-4 py-4">{{ order.userName || 'نامشخص' }}</td>
     </ng-container>
     <ng-container matColumnDef="total">
-      <th mat-header-cell *matHeaderCellDef>مبلغ کل</th>
-      <td mat-cell *matCellDef="let order" @rowAnimation>{{ order.total | number }} تومان</td>
+      <th mat-header-cell *matHeaderCellDef class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 font-semibold px-4 py-4">مبلغ کل</th>
+      <td mat-cell *matCellDef="let order" @rowAnimation class="text-neutral-900 dark:text-neutral-50 px-4 py-4">{{ order.total | number }} تومان</td>
     </ng-container>
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>وضعیت</th>
-      <td mat-cell *matCellDef="let order" @rowAnimation>{{ order.status | orderStatus }}</td>
+      <th mat-header-cell *matHeaderCellDef class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 font-semibold px-4 py-4">وضعیت</th>
+      <td mat-cell *matCellDef="let order" @rowAnimation class="text-neutral-900 dark:text-neutral-50 px-4 py-4">{{ order.status | orderStatus }}</td>
     </ng-container>
     <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef>تاریخ</th>
-      <td mat-cell *matCellDef="let order" @rowAnimation>{{ order.createdAt | date:'medium' }}</td>
+      <th mat-header-cell *matHeaderCellDef class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 font-semibold px-4 py-4">تاریخ</th>
+      <td mat-cell *matCellDef="let order" @rowAnimation class="text-neutral-900 dark:text-neutral-50 px-4 py-4">{{ order.createdAt | date:'medium' }}</td>
     </ng-container>
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>عملیات</th>
-      <td mat-cell *matCellDef="let order" @rowAnimation>
-        <button mat-raised-button color="primary" (click)="openStatusForm(order)">تغییر وضعیت</button>
-        <button mat-raised-button color="primary" [routerLink]="['/orders', order.id]" class="mr-2">جزئیات</button>
+      <th mat-header-cell *matHeaderCellDef class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 font-semibold px-4 py-4">عملیات</th>
+      <td mat-cell *matCellDef="let order" @rowAnimation class="flex justify-end gap-3 px-4 py-4 items-center">
+        <button mat-button (click)="openStatusForm(order)" class="bg-primary-500 text-white border border-primary-600 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">تغییر وضعیت</button>
+        <button mat-button [routerLink]="['/orders', order.id]" class="bg-primary-500 text-white border border-primary-600 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">جزئیات</button>
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-neutral-100 dark:bg-neutral-700"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="h-24 border-b border-neutral-200 dark:border-neutral-700"></tr>
   </table>
 
   <mat-paginator
@@ -57,12 +57,13 @@
     [pageIndex]="pageIndex()"
     [length]="filteredOrders().length"
     (page)="onPageChange($event)"
-    showFirstLastButtons>
+    showFirstLastButtons
+    class="bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 rounded-xl mt-6">
   </mat-paginator>
 
   @if (paginatedOrders().length === 0) {
-    <div class="no-data">
-      <p>هیچ سفارشی یافت نشد</p>
+    <div class="no-data mt-6 text-center">
+      <p class="text-neutral-600 dark:text-neutral-400 text-base">هیچ سفارشی یافت نشد</p>
     </div>
   }
 </div>
