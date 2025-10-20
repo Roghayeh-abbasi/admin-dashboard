@@ -37,7 +37,7 @@ export class LoginComponent {
         localStorage.setItem('username', username); 
         this.loginForm.reset();
         this.errorMessage = '';
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/admin']);
       } else {
         this.errorMessage = 'فقط ادمین با نام کاربری و رمز معتبر می‌تواند وارد شود!';
       }
