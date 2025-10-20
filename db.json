@@ -19,7 +19,7 @@
         }
       ],
       "total": 1600,
-      "status": "shipped",
+      "status": "canceled",
       "createdAt": "1404-07-26"
     },
     {
@@ -73,7 +73,7 @@
         }
       ],
       "total": 430,
-      "status": "PENDING",
+      "status": "shipped",
       "createdAt": "1404-07-23"
     },
     {

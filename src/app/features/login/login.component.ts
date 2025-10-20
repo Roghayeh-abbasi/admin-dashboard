@@ -14,6 +14,7 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   loginForm!: FormGroup;
+  errorMessage: string = '';
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -22,11 +23,26 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+ onSubmit() {
     if (this.loginForm.valid) {
-      const token = 'fake-token-123'; 
-      localStorage.setItem('authToken', token); 
-      this.router.navigate(['/dashboard']); 
+      const { username, password } = this.loginForm.value;
+     
+      const validAdmins = [
+        { username: 'admin', password: 'admin123', role: 'admin' }
+      ];
+      const admin = validAdmins.find(u => u.username === username && u.password === password);
+      if (admin) {
+        const token = 'fake-token-' + Date.now();
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('username', username); 
+        this.loginForm.reset();
+        this.errorMessage = '';
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.errorMessage = 'فقط ادمین با نام کاربری و رمز معتبر می‌تواند وارد شود!';
+      }
+    } else {
+      this.errorMessage = 'لطفاً فرم را به‌درستی پر کنید.';
     }
   }
 }
