@@ -16,5 +16,6 @@
       </div>
     </div>
     <button type="submit" [disabled]="loginForm.invalid">ورود</button>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   </form>
 </div>

@@ -49,6 +49,13 @@ button:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
 }
+.error-message {
+  color: #dc3545;
+  font-size: 0.9em;
+  margin-top: 10px;
+  text-align: center;
+}
+
 @media (max-width: 480px) {
   .login-container {
     width: 90%;
