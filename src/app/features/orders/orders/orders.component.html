@@ -43,7 +43,7 @@
       <th mat-header-cell *matHeaderCellDef class="bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50 font-semibold px-4 py-4">عملیات</th>
       <td mat-cell *matCellDef="let order" @rowAnimation class="flex justify-end gap-3 px-4 py-4 items-center">
         <button mat-button (click)="openStatusForm(order)" class="bg-primary-500 text-white border border-primary-600 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">تغییر وضعیت</button>
-        <button mat-button [routerLink]="['/orders', order.id]" class="bg-primary-500 text-white border border-primary-600 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">جزئیات</button>
+        <button mat-button [routerLink]="['/admin/orders', order.id]" class="bg-primary-500 text-white border border-primary-600 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">جزئیات</button>
       </td>
     </ng-container>
 

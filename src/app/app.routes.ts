@@ -16,7 +16,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'orders',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       },
       {
@@ -24,7 +24,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent)
       },
-     {
+      {
         path: 'users',
         loadComponent: () =>
           import('./features/users/users.component').then(c => c.UsersComponent)
@@ -47,8 +47,7 @@ export const routes: Routes = [
       {
         path: 'settings',
         loadComponent: () =>
-          import('./features/settings/settings/settings.component').then(c => c.SettingsComponent),
-        canActivate: [authGuard]
+          import('./features/settings/settings/settings.component').then(c => c.SettingsComponent)
       }
     ]
   },

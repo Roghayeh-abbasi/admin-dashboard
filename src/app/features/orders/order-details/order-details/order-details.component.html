@@ -32,7 +32,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="h-24 border-b border-neutral-200 dark:border-neutral-700"></tr>
     </table>
     <div class="actions mt-6 flex justify-end">
-      <button mat-button routerLink="/orders" class="bg-primary-500 text-white border border-primary-600 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">بازگشت</button>
+      <button mat-button [routerLink]="['/admin/orders']" class="bg-primary-500 text-white border border-primary-600 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 hover:bg-primary-600 hover:border-primary-700">بازگشت</button>
     </div>
   } @else {
     <p class="loading text-neutral-600 dark:text-neutral-400 text-base text-center mb-8">در حال بارگذاری...</p>

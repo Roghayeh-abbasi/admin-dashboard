@@ -36,7 +36,7 @@ export class LoginComponent {
         localStorage.setItem('username', username);
         this.loginForm.reset();
         this.errorMessage = '';
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin/dashboard']);
       } else {
         this.errorMessage = 'نام کاربری یا رمز عبور اشتباه است!';
       }
